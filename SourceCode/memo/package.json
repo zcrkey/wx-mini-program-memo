@@ -1,5 +1,5 @@
 {
-  "name": "demo",
+  "name": "memo",
   "version": "1.0.0",
   "scripts": {
     "tsc": "./node_modules/typescript/bin/tsc",
