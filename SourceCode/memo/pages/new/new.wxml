@@ -1,2 +1,10 @@
 <!--pages/new/new.wxml-->
-<text>pages/new/new.wxml</text>
+<view class="container">
+  <text>pages/new/new.wxml</text>
+  <view class="page-section">
+    <view class="page-section-title">这是一个可以自动聚焦的textarea</view>
+    <view class="textarea-wrp">
+      <textarea auto-focus="true" style="height: 3em" />
+    </view>
+  </view>
+</view>
