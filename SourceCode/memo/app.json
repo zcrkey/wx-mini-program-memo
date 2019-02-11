@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/new/new",
     "pages/about/about",
     "pages/logs/logs"
   ],
@@ -13,13 +14,19 @@
     "pageOrientation": "auto"
   },
   "tabBar": {
-    "color": "#555",
+    "color": "#444",
     "borderStyle": "black",
     "backgroundColor": "#fff",
     "selectedColor": "#FF9700",
     "list": [
       {
         "pagePath": "pages/index/index",
+        "iconPath": "assets/imgs/tabBarHome.png",
+        "selectedIconPath": "assets/imgs/tabBarHomeSelected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/new/new",
         "iconPath": "assets/imgs/tabBarNew.png",
         "selectedIconPath": "assets/imgs/tabBarNewSelected.png",
         "text": "新建"

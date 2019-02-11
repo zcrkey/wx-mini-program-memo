@@ -1,0 +1,4 @@
+<!--pages/new/new.wxml-->
+<view class="container">
+  <text>pages/new/new.wxml</text>
+</view>

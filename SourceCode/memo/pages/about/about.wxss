@@ -1,7 +1,8 @@
 /* pages/about/about.wxss */
 
 .logo {
-  margin-bottom: 60px;
+  margin-bottom: 100rpx;
+  margin-top: 200rpx;
 }
 
 .logo .fa {
