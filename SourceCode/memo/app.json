@@ -1,0 +1,35 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/about/about",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FF9700",
+    "navigationBarTitleText": "备忘录",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true,
+    "pageOrientation": "auto"
+  },
+  "tabBar": {
+    "color": "#555",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "selectedColor": "#FF9700",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "assets/imgs/tabBarNew.png",
+        "selectedIconPath": "assets/imgs/tabBarNewSelected.png",
+        "text": "新建"
+      },
+      {
+        "pagePath": "pages/about/about",
+        "iconPath": "assets/imgs/tabBarAbout.png",
+        "selectedIconPath": "assets/imgs/tabBarAboutSelected.png",
+        "text": "关于"
+      }
+    ]
+  }
+}

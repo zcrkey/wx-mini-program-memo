@@ -1,0 +1,16 @@
+/* pages/about/about.wxss */
+
+.logo {
+  margin-bottom: 60px;
+}
+
+.logo .fa {
+  color: #ff9700;
+}
+
+.text {
+  text-align: center;
+  color: #333;
+  font-size: 16px;
+  line-height: 24px;
+}

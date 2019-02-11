@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="logo">
+    <icon class="fa fa-5x fa-registered"></icon>
+  </view>
+  <view class="text">
+    <text>
+    关于备忘录
+    创建于 2019.02
+    </text>
+  </view>
+
+</view>
