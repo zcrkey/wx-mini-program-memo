@@ -1,8 +1,8 @@
 /* pages/about/about.wxss */
 
 .logo {
-  margin-bottom: 100rpx;
-  margin-top: 200rpx;
+  margin-bottom: 80rpx;
+  margin-top: 150rpx;
 }
 
 .logo .fa {
@@ -11,6 +11,18 @@
 
 .text {
   text-align: center;
+  padding: 0px 15px;
+}
+
+.text .title {
+  color: #111;
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.text .content {
   color: #333;
   font-size: 16px;
   line-height: 24px;

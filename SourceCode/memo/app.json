@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/new/new",
     "pages/about/about",
+    "pages/explain/explain",
     "pages/logs/logs"
   ],
   "window": {
