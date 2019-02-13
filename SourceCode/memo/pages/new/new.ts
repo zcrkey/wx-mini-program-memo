@@ -99,9 +99,6 @@ Page({
    */
   onHide() {
     try {
-      // 设置编辑状态
-      wx.setStorageSync('isEdit', false);
-      this.data.isEdit = false;
       wx.setTabBarItem({
         index: 1,
         text: '新建',

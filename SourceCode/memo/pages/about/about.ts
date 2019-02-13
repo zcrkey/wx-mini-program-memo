@@ -18,9 +18,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    wx.setNavigationBarTitle({
-      title: '备忘录 - 关于'
-    })
+    try {
+      wx.setNavigationBarTitle({
+        title: '备忘录 - 关于'
+      })
+      // 设置编辑状态
+      wx.setStorageSync('isEdit', false)
+    } catch (e) { }
   }
-
 })

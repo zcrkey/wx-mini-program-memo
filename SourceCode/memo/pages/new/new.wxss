@@ -12,6 +12,7 @@
   height: 42px;
   line-height: 42px;
   border-bottom: 1px dashed #ccc;
+  z-index: 100 !important;
 }
 
 .new .header .save {
@@ -48,6 +49,8 @@
 }
 
 .new .body {
+  z-index: 50 !important;
+  position: relative;
   margin-top: 42px;
   padding: 10px 15px 10px 15px;
 }
@@ -63,9 +66,11 @@
   padding-bottom: 5px;
 }
 
-.new .body .title input {
+.new .body .title textarea {
   color: #000 !important;
   font-weight: 550 !important;
+  height: 19px;
+  z-index: 50 !important;
 }
 
 .new .body .content {
@@ -76,4 +81,5 @@
   color: #444 !important;
   width: 100%;
   max-width: 100% !important;
+  z-index: 50 !important;
 }

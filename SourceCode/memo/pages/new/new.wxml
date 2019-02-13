@@ -14,16 +14,16 @@
       保存
     </view>
   </view>
+
   <view class='body'>
     <view class='time'>
       {{time}}
     </view>
     <view class='title'>
-      <input bindinput="memoTitle" placeholder="请输入标题" value="{{title}}" />
+      <textarea bindinput="memoTitle" placeholder="请输入标题" maxlength="-1" auto-focus="true" focus="true" value="{{title}}" />
     </view>
     <view class='content'>
       <textarea bindinput="memoContent" placeholder="请输入备忘录内容" maxlength="-1" auto-height='true' value="{{content}}" />
     </view>
   </view>
-
 </view>

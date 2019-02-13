@@ -4,6 +4,8 @@ Page({
   data: {
     isNullData: true,
     memoListData: [] as any[],
+    pageSize: 12,
+    count: 0,
     //开始坐标
     startX: 0 as number,
     startY: 0 as number
@@ -16,23 +18,55 @@ Page({
     let that = this;
     wx.stopPullDownRefresh({
       success() {
+        that.data.count = 0;
+        that.setData!({
+          count: that.data.count
+        });
         that.getMemoListData();
       }
     });
   },
 
   /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom() {
+    let memoListData = wx.getStorageSync('memoListData');
+    if (memoListData != null) {
+      if (this.data.count == Math.ceil(memoListData.length / this.data.pageSize)) {
+        wx.showToast({
+          title: '没有更多数据了！',
+          icon: 'none',
+          duration: 1500
+        })
+      } else {
+        this.data.count++;
+        this.getMemoListData();
+      }
+    }
+
+  },
+
+  /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
-    this.getMemoListData();
-  },
-
-  onLoad() {
     try {
+      this.data.count = 0;
+      this.setData!({
+        count: this.data.count
+      });
+      this.getMemoListData();
       // 设置编辑状态
       wx.setStorageSync('isEdit', false)
     } catch (e) { }
+  },
+
+  onLoad() {
+    this.data.count = 0;
+    this.setData!({
+      count: this.data.count
+    });
     this.getMemoListData();
   },
 
@@ -44,13 +78,24 @@ Page({
     try {
       let memoListData = wx.getStorageSync('memoListData');
       if (memoListData) {
-
         memoListData.forEach((item: any) => {
           //默认隐藏删除
           item.isTouchMove = false;
         });
+        // 分页
+        let memoListDataTemp: any[] = [];
+        let total = memoListData.length;
+        let pageNum = (this.data.count + 1) * this.data.pageSize;
+        if (pageNum > total) {
+          pageNum = total;
+          this.data.count = Math.ceil(total / this.data.pageSize);
+        }
+        for (let i = 0; i < pageNum; i++) {
+          memoListDataTemp.push(memoListData[i]);
+        }
         this.setData!({
-          memoListData: memoListData,
+          count: this.data.count,
+          memoListData: memoListDataTemp,
           isNullData: false
         })
       } else {
