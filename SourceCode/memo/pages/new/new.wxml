@@ -1,12 +1,13 @@
 <!--pages/new/new.wxml-->
 <view class="new">
   <view class='header'>
-    <view class='time'>
-      {{time}}
-    </view>
     <view class='cancel' bindtap="cancel">
       <i class="fa fa-close"></i>
       取消
+    </view>
+    <view class="delete {{isEdit?'show-view':'hide-view'}}" bindtap="deleteModal">
+      <i class="fa fa-trash-o"></i>
+      删除
     </view>
     <view class='save' bindtap="save">
       <i class="fa fa-save"></i>
@@ -14,6 +15,9 @@
     </view>
   </view>
   <view class='body'>
+    <view class='time'>
+      {{time}}
+    </view>
     <view class='title'>
       <input bindinput="memoTitle" type="text" placeholder="请输入标题" focus="true" value="{{title}}" />
     </view>

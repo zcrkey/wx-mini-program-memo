@@ -2,34 +2,12 @@
 
 Page({
   data: {
-
     isNullData: true,
-    memoListData: [] as any
-    /*
-        height: 20,
-        option: '编辑',
-        topText: true,
-        isEdit: false,
-        isShow: false,
-        isNull: true,
-        primarySize: 'default',
-        memoLists: [],
-        delLists: [],
-        newLists: [],
-        allLength: 0,
-        checkboxLength: 0,
-        btnText: '删除全部',
-        delFunc: 'delAllMemo'
-        */
+    memoListData: [] as any[],
+    //开始坐标
+    startX: 0 as number,
+    startY: 0 as number
   },
-  /*
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
-*/
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -60,8 +38,13 @@ Page({
   getMemoListData() {
     // 获取本地缓存备忘录列表数据
     try {
-      let memoListData = wx.getStorageSync('memoListData')
+      let memoListData = wx.getStorageSync('memoListData');
       if (memoListData) {
+
+        memoListData.forEach((item: any) => {
+          //默认隐藏删除
+          item.isTouchMove = false;
+        });
         this.setData!({
           memoListData: memoListData,
           isNullData: false
@@ -114,170 +97,105 @@ Page({
     } catch (e) { }
   },
 
-  /*
-
-  // 使用说明
-  instruction: function () {
+  /**
+   * 删除提示
+   */
+  onClickdeleteModal(event: any) {
+    let that = this;
     wx.showModal({
-      title: '关于备忘录',
-      content: '记录重要的会话消息(任务，网址，地址等等)，避免消息过多而被疏漏。所有信息均将保存到手机缓存中，他人无法获取，可放心使用。有任何建议、意见欢迎拍砖至Wginit@163.com',
-      showCancel: false,
-      confirmText: '知道了',
-      success: function (res) {
-        console.log('用户点击确定' + res)
-
-      }
-    })
-  },
-  // 编辑列表
-  editCheckBox(e: any) {
-    console.log("e" + e);
-    var that = this;
-    this.setData!({
-      topText: (!that.data.topText)
-    })
-    if (this.data.topText) {
-      this.setData!({
-        option: '编辑',
-        isEdit: false,
-        isShow: false
-      })
-    } else {
-      this.setData!({
-        option: '取消',
-        isEdit: true,
-        isShow: true
-      })
-    }
-  },
-
-  // 添加备忘录，跳转到新页面
-  addMemoLists: function () {
-    wx.switchTab({
-      url: '/pages/new/new'
-    })
-  },
-
-  //选择单条记录  
-  checkboxChange(e: any) {
-    console.log("e" + e);
-    try {
-      wx.setStorageSync('delLists', e.detail.value)
-    } catch (e) {
-      wx.showToast({
-        title: '保存失败',
-        icon: 'none',
-        duration: 2000
-      })
-    }
-
-    this.setData!({
-      checkboxLength: e.detail.value.length,
-      btnText: '删除' + e.detail.value.length + '条',
-      delFunc: 'delMemoLists'
-    });
-    if (this.data.checkboxLength == 0) {
-      this.setData!({
-        btnText: '删除全部',
-        delFunc: 'delAllMemo'
-      })
-    }
-
-  },
-
-  // 删除全部备忘录
-  delAllMemo: function () {
-    var that = this;
-    wx.showModal({
-      title: '删除全部',
-      content: '确认删除' + that.data.allLength + '条记录吗?',
-      success: function (res) {
+      title: '删除提示',
+      content: '是否确定删除该备忘录！',
+      success(res) {
         if (res.confirm) {
-          wx.clearStorageSync();
-          wx.showToast({
-            title: '删除成功',
-            icon: 'success',
-            duration: 500
-          });
-          setTimeout(function () {
-            wx.switchTab({
-              url: '/pages/index/index'
-            });
-          }, 500);
+          that.onClickdelete(event);
+        } else if (res.cancel) {
         }
       }
     })
   },
-  // 删除单条备忘记录
-  delMemoLists(e: any) {
-    console.log("e" + e);
-    var that = this;
+
+  /**
+   * 点击删除
+   */
+  onClickdelete(event: any) {
     try {
-      wx.showModal({
-        title: '',
-        content: '确认删除这' + that.data.checkboxLength + '条吗?',
-        success: function (res) {
-          if (res.confirm) {
-            try {
-              var delValue = wx.getStorageSync('delLists');
-              // 数组从大到小排序
-              delValue.sort((a: number, b: number) => {
-                return a < b;
-              })
-
-              if (delValue) {
-                if (that.data.allLength == that.data.checkboxLength) {
-                  //wx.clearStorageSync();
-                  wx.removeStorage({
-                    key: 'memoLists'
-
-                  });
-
-                } else {
-                  for (var i = 0; i < delValue.length; i++) {
-                    try {
-                      that.data.memoLists[0].splice(delValue[i] - 1, 1);   //删除指定下标的值
-                      wx.setStorageSync('memoLists', that.data.memoLists[0]);   //异步更新列表缓存
-                      wx.showToast({
-                        title: '删除成功',
-                        icon: 'success',
-                        duration: 500
-                      });
-                    } catch (e) { }
-                  }
-                }
-                // 删除后刷新页面
-                setTimeout(function () {
-                  wx.switchTab({
-                    url: '/pages/index/index'
-                  });
-                }, 500);
-
-              } else {
-                wx.showToast({
-                  title: '获取数据失败',
-                  icon: 'none',
-                  duration: 1000
-                });
-              }
-            } catch (e) {
-              wx.showToast({
-                title: '删除失败',
-                icon: 'none',
-                duration: 1500
-              })
-            }
-          }
+      let index: number = event.currentTarget.dataset.index;
+      if (index != null && this.data.memoListData != null) {
+        this.data.memoListData.splice(event.currentTarget.dataset.index, 1);
+        this.setData!({
+          memoListData: this.data.memoListData
+        })
+        //异步更新列表缓存
+        wx.setStorageSync('memoListData', this.data.memoListData);
+        if (this.data.memoListData.length == 0) {
+          wx.clearStorageSync();
         }
-      })
+        wx.showToast({
+          title: '删除成功',
+          icon: 'success',
+          duration: 1000
+        });
+      }
+    } catch (e) { }
+  },
 
-    } catch (e) {
-      wx.showToast({
-        title: '删除失败',
-        icon: 'none',
-        duration: 1500
-      })
-    }
+  /**
+   * 手指触摸动作开始 记录起点X坐标
+   */
+  touchstart(event: any) {
+    console.log("touchstart");
+    //开始触摸时 重置所有删除
+    this.data.memoListData.forEach((item: any) => {
+      //只操作为true的
+      if (item.isTouchMove)
+        item.isTouchMove = false;
+    });
+    //更新数据
+    this.setData!({
+      memoListData: this.data.memoListData,
+      startX: event.changedTouches[0].clientX,
+      startY: event.changedTouches[0].clientY
+    })
+  },
+
+  /**
+   * 滑动事件处理
+   */
+  touchmove(event: any) {
+    console.log("touchmove");
+    let that = this,
+      index = event.currentTarget.dataset.index,//当前索引
+      startX = that.data.startX,//开始X坐标
+      startY = that.data.startY,//开始Y坐标
+      touchMoveX = event.changedTouches[0].clientX,//滑动变化坐标
+      touchMoveY = event.changedTouches[0].clientY,//滑动变化坐标
+      //获取滑动角度
+      angle = that.angle({ X: startX, Y: startY }, { X: touchMoveX, Y: touchMoveY });
+
+    that.data.memoListData.forEach((v: any, i: number) => {
+      v.isTouchMove = false
+      //滑动超过30度角 return
+      if (Math.abs(angle) > 30) return;
+      if (i == index) {
+        if (touchMoveX > startX) //右滑
+          v.isTouchMove = false
+        else //左滑
+          v.isTouchMove = true
+      }
+    });
+    //更新数据
+    that.setData!({
+      memoListData: that.data.memoListData
+    })
+  },
+
+  /**
+   * 计算滑动角度
+   */
+  angle(start: any, end: any) {
+    let _X = end.X - start.X, _Y = end.Y - start.Y
+    //返回角度 Math.atan()返回数字的反正切值
+    return 360 * Math.atan(_Y / _X) / (2 * Math.PI);
   }
-*/
+
 })

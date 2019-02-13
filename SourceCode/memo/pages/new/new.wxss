@@ -14,28 +14,33 @@
   border-bottom: 1px dashed #ccc;
 }
 
-.new .header .time {
-  margin-left: 15px;
-  font-size: 14px;
-  color: #666;
-}
-
 .new .header .save {
   position: absolute;
   right: 0px;
   top: 0px;
-  width: 70px;
+  width: 80px;
   height: 38px;
   line-height: 38px;
   text-align: center;
   color: #ff9700;
 }
 
+.new .header .delete {
+  position: absolute;
+  right: 80px;
+  top: 0px;
+  width: 80px;
+  height: 38px;
+  line-height: 38px;
+  text-align: center;
+  color: #f00;
+}
+
 .new .header .cancel {
   position: absolute;
-  right: 70px;
+  left: 0px;
   top: 0px;
-  width: 70px;
+  width: 80px;
   height: 38px;
   line-height: 38px;
   text-align: center;
@@ -47,12 +52,21 @@
   padding: 10px 15px 10px 15px;
 }
 
+.new .body .time {
+  font-size: 13px;
+  color: #9A9A9A;
+  margin-bottom: 4px;
+}
+
 .new .body .title {
+  color: #000;
+  font-weight: 550;
   border-bottom: 1px solid #ccc;
   padding-bottom: 5px;
 }
 
 .new .body .content {
+  color: #555;
   margin-top: 5px;
 }
 

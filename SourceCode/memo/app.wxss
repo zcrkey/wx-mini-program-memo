@@ -1,7 +1,16 @@
 /**font-awesome.wxss**/
 @import "./assets/css/font-awesome.wxss";
 
+.show-view {
+  display: block !important;
+}
+
+.hide-view {
+  display: none !important;
+}
+
 /**app.wxss**/
+
 .container {
   height: 100%;
   display: flex;
@@ -10,4 +19,4 @@
   justify-content: space-between;
   padding: 10rpx 0;
   box-sizing: border-box;
-} 
+}

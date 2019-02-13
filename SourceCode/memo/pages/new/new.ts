@@ -8,7 +8,8 @@ Page({
     time: '',
     title: '',
     content: '',
-    memoListData: [] as any
+    memoListData: [] as any,
+    isEdit: false
   },
 
   onLoad() {
@@ -49,7 +50,8 @@ Page({
                 time: formatTime(new Date(), "-"),
                 title: memoListData[i].title,
                 content: memoListData[i].content,
-                memoListData: memoListData
+                memoListData: memoListData,
+                isEdit: true
               });
               break;
             }
@@ -70,7 +72,8 @@ Page({
           time: formatTime(new Date(), "-"),
           title: '',
           content: '',
-          memoListData: memoListData ? memoListData : []
+          memoListData: memoListData ? memoListData : [],
+          isEdit: false
         });
         wx.setTabBarItem({
           index: 1,
@@ -80,16 +83,6 @@ Page({
         });
       }
     } catch (e) { }
-    /*
-    wx.setNavigationBarColor({
-      frontColor: '#ffffff',
-      backgroundColor: '#ff0000',
-      animation: {
-        duration: 400,
-        timingFunc: 'easeIn'
-      }
-    })
-    */
   },
 
   /**
@@ -98,7 +91,14 @@ Page({
   onHide() {
     try {
       // 设置编辑状态
-      wx.setStorageSync('isEdit', false)
+      wx.setStorageSync('isEdit', false);
+      this.data.isEdit = false;
+      wx.setTabBarItem({
+        index: 1,
+        text: '新建',
+        iconPath: 'assets/imgs/tabBarNew.png',
+        selectedIconPath: 'assets/imgs/tabBarNewSelected.png'
+      });
     } catch (e) { }
   },
 
@@ -124,17 +124,77 @@ Page({
    * 取消
    */
   cancel() {
-    this.setData!({
-      id: '',
-      time: '',
-      title: '',
-      content: '',
-      memoListData: []
-    });
-    // 切换到首页
-    wx.switchTab({
-      url: '/pages/index/index'
+    try {
+      this.setData!({
+        id: '',
+        time: '',
+        title: '',
+        content: '',
+        memoListData: []
+      });
+      // 设置编辑状态
+      wx.setStorageSync('isEdit', false);
+      this.data.isEdit = false;
+      wx.setTabBarItem({
+        index: 1,
+        text: '新建',
+        iconPath: 'assets/imgs/tabBarNew.png',
+        selectedIconPath: 'assets/imgs/tabBarNewSelected.png'
+      });
+      // 切换到首页
+      wx.switchTab({
+        url: '/pages/index/index'
+      })
+    } catch (e) { }
+  },
+
+  /**
+   * 删除提示
+   */
+  deleteModal() {
+    let that = this;
+    wx.showModal({
+      title: '删除提示',
+      content: '是否确定删除该备忘录！',
+      success(res) {
+        if (res.confirm) {
+          that.delete();
+        } else if (res.cancel) {
+        }
+      }
     })
+  },
+
+  /**
+   * 删除
+   */
+  delete() {
+    if (this.data.id != "") {
+      try {
+        if (this.data.memoListData != null) {
+          let index: number = this.data.memoListData.findIndex((item: any) => item.id == this.data.id);
+          //删除指定下标的值
+          this.data.memoListData.splice(index, 1);
+          //异步更新列表缓存
+          wx.setStorageSync('memoListData', this.data.memoListData);
+          if (this.data.memoListData.length == 0) {
+            wx.clearStorageSync();
+          }
+          wx.showToast({
+            title: '删除成功',
+            icon: 'success',
+            duration: 1000
+          });
+          // 删除后刷新页面
+          setTimeout(() => {
+            wx.switchTab({
+              url: '/pages/index/index'
+            })
+          }, 800);
+        }
+
+      } catch (e) { }
+    }
   },
 
   /**
@@ -175,7 +235,20 @@ Page({
       }
       try {
         // 设置本地缓存备忘录列表数据
-        wx.setStorageSync('memoListData', this.data.memoListData)
+        wx.setStorageSync('memoListData', this.data.memoListData);
+        wx.showToast({
+          title: '保存成功',
+          icon: 'success',
+          duration: 1000
+        });
+
+        // 切换到首页
+        setTimeout(() => {
+          wx.switchTab({
+            url: '/pages/index/index'
+          })
+        }, 800);
+
       } catch (e) {
         wx.showToast({
           title: "保存失败，请稍后再试！",
@@ -183,10 +256,7 @@ Page({
           duration: 2000
         })
       }
-      // 切换到首页
-      wx.switchTab({
-        url: '/pages/index/index'
-      })
+
     }
   }
 
