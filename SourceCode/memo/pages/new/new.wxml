@@ -4,6 +4,10 @@
     <view class='time'>
       {{time}}
     </view>
+    <view class='cancel' bindtap="cancel">
+      <i class="fa fa-close"></i>
+      取消
+    </view>
     <view class='save' bindtap="save">
       <i class="fa fa-save"></i>
       保存

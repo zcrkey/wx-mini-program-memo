@@ -33,12 +33,12 @@ Page({
   onShow() {
     // 获取编辑状态
     try {
-      let isEdit = wx.getStorageSync('isEdit')
+      let isEdit = wx.getStorageSync('isEdit');
+      let memoListData = wx.getStorageSync('memoListData');
       if (isEdit) {
         wx.setNavigationBarTitle({
           title: '备忘录 - 编辑'
-        })
-        let memoListData = wx.getStorageSync('memoListData')
+        });
         if (memoListData) {
           let id = wx.getStorageSync('id');
           for (let i = 0; i < memoListData.length; i++) {
@@ -54,7 +54,13 @@ Page({
               break;
             }
           }
-        }
+        };
+        wx.setTabBarItem({
+          index: 1,
+          text: '编辑',
+          iconPath: 'assets/imgs/tabBarEdit.png',
+          selectedIconPath: 'assets/imgs/tabBarEditSelected.png'
+        });
       } else {
         wx.setNavigationBarTitle({
           title: '备忘录 - 新建'
@@ -64,10 +70,26 @@ Page({
           time: formatTime(new Date(), "-"),
           title: '',
           content: '',
-          memoListData: []
+          memoListData: memoListData ? memoListData : []
+        });
+        wx.setTabBarItem({
+          index: 1,
+          text: '新建',
+          iconPath: 'assets/imgs/tabBarNew.png',
+          selectedIconPath: 'assets/imgs/tabBarNewSelected.png'
         });
       }
     } catch (e) { }
+    /*
+    wx.setNavigationBarColor({
+      frontColor: '#ffffff',
+      backgroundColor: '#ff0000',
+      animation: {
+        duration: 400,
+        timingFunc: 'easeIn'
+      }
+    })
+    */
   },
 
   /**
@@ -95,6 +117,23 @@ Page({
   memoContent(e: any) {
     this.setData!({
       content: e.detail.value
+    })
+  },
+
+  /**
+   * 取消
+   */
+  cancel() {
+    this.setData!({
+      id: '',
+      time: '',
+      title: '',
+      content: '',
+      memoListData: []
+    });
+    // 切换到首页
+    wx.switchTab({
+      url: '/pages/index/index'
     })
   },
 

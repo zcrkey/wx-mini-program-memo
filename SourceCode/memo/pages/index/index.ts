@@ -47,6 +47,10 @@ Page({
   },
 
   onLoad() {
+    try {
+      // 设置编辑状态
+      wx.setStorageSync('isEdit', false)
+    } catch (e) { }
     this.getMemoListData();
   },
 
