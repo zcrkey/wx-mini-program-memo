@@ -19,7 +19,7 @@
       {{time}}
     </view>
     <view class='title'>
-      <input bindinput="memoTitle" type="text" placeholder="请输入标题" focus="true" value="{{title}}" />
+      <input bindinput="memoTitle" placeholder="请输入标题" value="{{title}}" />
     </view>
     <view class='content'>
       <textarea bindinput="memoContent" placeholder="请输入备忘录内容" maxlength="-1" auto-height='true' value="{{content}}" />

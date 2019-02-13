@@ -13,8 +13,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh() {
-    console.log("监听用户下拉动作");
-    this.getMemoListData();
+    let that = this;
+    wx.stopPullDownRefresh({
+      success() {
+        that.getMemoListData();
+      }
+    });
   },
 
   /**
@@ -68,7 +72,6 @@ Page({
    * 点击新建
    */
   onClickNew() {
-    console.log("点击新建");
     try {
       // 设置编辑状态
       wx.setStorageSync('isEdit', false)
@@ -83,12 +86,11 @@ Page({
    * 点击编辑
    */
   onClickEdit(event: any) {
-    console.log("点击编辑");
     try {
       // 设置编辑状态
       wx.setStorageSync('isEdit', true)
       let id = event.currentTarget.dataset.item.id;
-      // 设置编辑状态
+      // 设置Id
       wx.setStorageSync('id', id)
       // 切换到新建
       wx.switchTab({
@@ -143,7 +145,6 @@ Page({
    * 手指触摸动作开始 记录起点X坐标
    */
   touchstart(event: any) {
-    console.log("touchstart");
     //开始触摸时 重置所有删除
     this.data.memoListData.forEach((item: any) => {
       //只操作为true的
@@ -162,7 +163,6 @@ Page({
    * 滑动事件处理
    */
   touchmove(event: any) {
-    console.log("touchmove");
     let that = this,
       index = event.currentTarget.dataset.index,//当前索引
       startX = that.data.startX,//开始X坐标

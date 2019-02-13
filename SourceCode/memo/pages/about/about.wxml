@@ -1,6 +1,6 @@
 <view class="container">
   <view class="logo">
-    <icon class="fa fa-5x fa-registered"></icon>
+    <cover-image class="img" src="/assets/imgs/logo.jpg" />
   </view>
   <view class="text">
     <text class='title'>

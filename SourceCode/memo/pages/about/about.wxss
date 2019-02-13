@@ -1,12 +1,12 @@
 /* pages/about/about.wxss */
 
 .logo {
-  margin-bottom: 80rpx;
-  margin-top: 150rpx;
+  margin-top: 50rpx;
 }
 
-.logo .fa {
-  color: #ff9700;
+.logo .img {
+  margin-left: 20%;
+  width: 60%;
 }
 
 .text {

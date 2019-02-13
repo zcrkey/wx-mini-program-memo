@@ -5,18 +5,18 @@
     <view class="{{!isNullData?'show-view':'hide-view'}} list">
       <view class='box' wx:for="{{memoListData}}" for="null" wx:for-item="item" wx:for-index="index" wx:key="memoId">
         <view class="box-inside {{item.isTouchMove?'touch-move-active':''}}">
-          <view bindtap='onClickEdit' class="content " data-item="{{item}} " data-index="{{index}} " bindtouchstart="touchstart" bindtouchmove="touchmove">
-            <p class="title ">{{item.title}}</p>
-            <p class="time ">{{item.time}}</p>
-            <i class="fa fa-angle-right icon "></i>
+          <view bindtap='onClickEdit' class="content" data-item="{{item}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+            <p class="title">{{item.title}}</p>
+            <p class="time">{{item.time}}</p>
+            <i class="fa fa-angle-right icon"></i>
           </view>
-          <view class="delete" bindtap="onClickdeleteModal" data-index="{{index}} ">删除</view>
+          <view class="delete" bindtap="onClickdeleteModal" data-index="{{index}}">删除</view>
         </view>
       </view>
     </view>
-    <view class="nullList {{isNullData? 'show-view': 'hide-view'}} ">
-      <view bindtap='onClickNew' class="content ">
-        <i class="fa fa-3x fa-plus "></i>
+    <view class="nullList {{isNullData? 'show-view': 'hide-view'}}">
+      <view bindtap='onClickNew' class="content">
+        <cover-image class="img" src="/assets/imgs/logo.jpg" />
         <label>暂无记录，点击新建！</label>
       </view>
     </view>

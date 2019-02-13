@@ -29,6 +29,16 @@ Page({
   },
 
   /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh() {
+    wx.stopPullDownRefresh({
+      success() {
+      }
+    });
+  },
+
+  /**
    * 生命周期函数--监听页面显示
    */
   onShow() {
@@ -44,7 +54,6 @@ Page({
           let id = wx.getStorageSync('id');
           for (let i = 0; i < memoListData.length; i++) {
             if (memoListData[i].id == id) {
-              console.log("memoListData[i].title" + memoListData[i].title);
               this.setData!({
                 id: id,
                 time: formatTime(new Date(), "-"),

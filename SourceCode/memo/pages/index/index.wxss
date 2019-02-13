@@ -11,11 +11,12 @@
 .index .body .nullList .content {
   padding-top: 80px;
   text-align: center;
-  color: #888;
+  color: #666;
 }
 
-.index .body .nullList .content .fa {
-  color: #aaa;
+.index .body .nullList .content .img {
+  margin-left: 25%;
+  width: 50%;
 }
 
 .index .body .nullList .content label {
@@ -53,7 +54,7 @@
 .index .body .list .box .box-inside .content .title {
   display: block;
   color: #000;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -62,7 +63,7 @@
 .index .body .list .box .box-inside .content .time {
   display: block;
   color: #909090;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .index .body .list .box .box-inside .content .icon {
@@ -72,7 +73,7 @@
   width: 40px;
   text-align: center;
   font-size: 28px;
-  line-height: 63px;
+  line-height: 66px;
 }
 
 .index .body .list .box .box-inside .delete {
@@ -94,39 +95,3 @@
   -webkit-transform: translateX(0) !important;
   transform: translateX(0) !important;
 }
-
-/*
-.index .body .list  .box-inside {
-  width: 100%;
-  padding-right: 40px;
-  border-bottom: 1px solid #ccc;
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
-  -webkit-transform: translateX(90px);
-  transform: translateX(90px);
-  margin-left: -75px;
-}
-
-.index .body .list .box-flex {
-  width: 100%;
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-}
-
-.index .body .list .delete {
-  text-align: center;
-  background-color: orangered;
-  width: 90px;
-  color: #fff;
-  -webkit-transform: translateX(90px);
-  transform: translateX(90px);
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
-}
-
-.touch-move-active .box-inside, .touch-move-active .delete {
-  -webkit-transform: translateX(0) !important;
-  transform: translateX(0) !important;
-}
-*/
