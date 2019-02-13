@@ -4,7 +4,7 @@ Page({
   data: {
     isNullData: true,
     memoListData: [] as any[],
-    pageSize: 12,
+    pageSize: 20,
     count: 0,
     //开始坐标
     startX: 0 as number,
