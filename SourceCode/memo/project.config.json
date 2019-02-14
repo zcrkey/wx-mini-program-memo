@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.0",
+	"libVersion": "2.6.0",
 	"projectname": "memo",
 	"scripts": {
 		"beforeCompile": "npm run compile",
