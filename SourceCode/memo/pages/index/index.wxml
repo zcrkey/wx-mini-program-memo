@@ -1,5 +1,5 @@
 <view class="index">
-  <view class="header">
+  <view wx:if="{{!isNullData}}" class="header {{isListMode?'header-bg-f5f5f5':'header-bg-fff'}}">
     <view class='mode' bindtap="onClickToggleMode">
       <i wx:if="{{isListMode}}" class="fa fa-list"></i>
       <i wx:elif="{{!isListMode}}" class="fa fa-th-large"></i>

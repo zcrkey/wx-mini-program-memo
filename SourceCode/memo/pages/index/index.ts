@@ -203,6 +203,12 @@ Page({
         wx.setStorageSync('memoListData', this.data.memoListData);
         if (this.data.memoListData.length == 0) {
           wx.clearStorageSync();
+          this.data.isNullData = true;
+          this.data.count = 0;
+          this.setData!({
+            isNullData: this.data.isNullData,
+            count: this.data.count
+          });
         }
         wx.showToast({
           title: '删除成功',
