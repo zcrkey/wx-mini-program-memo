@@ -1,20 +1,39 @@
 <view class="index">
   <view class="header">
+    <view class='mode' bindtap="onClickToggleMode">
+      <i wx:if="{{isListMode}}" class="fa fa-list"></i>
+      <i wx:elif="{{!isListMode}}" class="fa fa-th-large"></i>
+    </view>
   </view>
   <view class="body">
-    <view class="{{!isNullData?'show-view':'hide-view'}} list">
-      <view class='box' wx:for="{{memoListData}}" for="null" wx:for-item="item" wx:for-index="index" wx:key="memoId">
-        <view class="box-inside {{item.isTouchMove?'touch-move-active':''}}">
-          <view bindtap='onClickEdit' class="content" data-item="{{item}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
-            <p class="title">{{item.title}}</p>
-            <p class="time">{{item.time}}</p>
-            <i class="fa fa-angle-right icon"></i>
+    <!--数据不为空-->
+    <view wx:if="{{!isNullData}}" class='mode'>
+      <!--列表模式-->
+      <view wx:if="{{isListMode}}" class="list">
+        <view class='box' wx:for="{{memoListData}}" for="null" wx:for-item="item" wx:for-index="index" wx:key="memoId">
+          <view class="box-inside {{item.isTouchMove?'touch-move-active':''}}">
+            <view bindtap='onClickEdit' class="content" data-item="{{item}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove">
+              <p class="title">{{item.title}}</p>
+              <p class="time">{{item.time}}</p>
+              <i class="fa fa-angle-right icon"></i>
+            </view>
+            <view class="delete" bindtap="onClickdeleteModal" data-index="{{index}}">删除</view>
           </view>
-          <view class="delete" bindtap="onClickdeleteModal" data-index="{{index}}">删除</view>
+        </view>
+      </view>
+      <!--方块模式-->
+      <view wx:elif="{{!isListMode}}" class='block'>
+        <view class='box' wx:for="{{memoListData}}" for="null" wx:for-item="item" wx:for-index="index" wx:key="memoId">
+          <view class="box-inside" bindtap='onClickEdit' bindlongpress="onClickLongDelete" bindtouchstart="touchStart" bindtouchend="touchEnd" data-item="{{item}}" data-index="{{index}}">
+            <p class="title">{{item.title}}</p>
+            <p class='content'>{{item.content}}</p>
+            <p class="time">{{item.time}}</p>
+          </view>
         </view>
       </view>
     </view>
-    <view class="nullList {{isNullData? 'show-view': 'hide-view'}}">
+    <!--数据为空-->
+    <view wx:elif="{{isNullData}}" class="nullList">
       <view bindtap='onClickNew' class="content">
         <cover-image class="img" src="/assets/imgs/logo.jpg" />
         <label>暂无记录，点击新建！</label>

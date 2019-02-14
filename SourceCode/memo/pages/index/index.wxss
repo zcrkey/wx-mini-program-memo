@@ -5,6 +5,33 @@
   overflow-x: hidden;
 }
 
+.index .header {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #f5f5f5;
+  width: 100%;
+  height: 42px;
+  line-height: 42px;
+  border-bottom: 1px dashed #ccc;
+  z-index: 100 !important;
+}
+
+.index .header .mode {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 50px;
+  height: 42px;
+  line-height: 42px;
+  text-align: center;
+  color: #ff9700;
+}
+
+.index .body {
+  margin-top: 42px;
+}
+
 .index .body .nullList {
 }
 
@@ -24,6 +51,8 @@
   margin-top: 10px;
   font-size: 14px;
 }
+
+/**列表模式**/
 
 .index .body .list {
 }
@@ -94,4 +123,60 @@
 .index .body .list .box .box-inside.touch-move-active .delete {
   -webkit-transform: translateX(0) !important;
   transform: translateX(0) !important;
+}
+
+/**方块模式**/
+
+.index .body .block {
+  background-color: #fff;
+}
+
+.index .body .block .box {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+}
+
+.index .body .block .box .box-inside {
+  padding: 6px 8px;
+  background-color: #f3f3f3;
+}
+
+.index .body .block .box:nth-of-type(odd) .box-inside {
+  margin: 4px 2px 0px 4px;
+}
+
+.index .body .block .box:nth-of-type(even) .box-inside {
+  margin: 4px 4px 0px 2px;
+}
+
+.index .body .block .box .box-inside .title {
+  display: block;
+  color: #000;
+  font-size: 15px;
+  font-weight: 550px;
+  margin-bottom: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.index .body .block .box .box-inside .content {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 2px;
+  height: 94px;
+  min-height: 94x;
+  max-height: 94px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+}
+
+.index .body .block .box .box-inside .time {
+  display: block;
+  color: #909090;
+  font-size: 12px;
 }

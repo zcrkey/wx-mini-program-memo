@@ -2,6 +2,7 @@
 
 Page({
   data: {
+    isListMode: false,
     isNullData: true,
     memoListData: [] as any[],
     pageSize: 20,
@@ -10,6 +11,11 @@ Page({
     startX: 0 as number,
     startY: 0 as number
   },
+
+  // 触摸开始时间
+  touchStartTime: 0,
+  // 触摸结束时间
+  touchEndTime: 0,
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -114,6 +120,20 @@ Page({
   },
 
   /**
+   * 按钮触摸开始触发的事件
+   */
+  touchStart(event: any) {
+    this.touchStartTime = event.timeStamp
+  },
+
+  /**
+   * 按钮触摸结束触发的事件
+   */
+  touchEnd(event: any) {
+    this.touchEndTime = event.timeStamp
+  },
+
+  /**
    * 点击新建
    */
   onClickNew() {
@@ -131,17 +151,24 @@ Page({
    * 点击编辑
    */
   onClickEdit(event: any) {
-    try {
-      // 设置编辑状态
-      wx.setStorageSync('isEdit', true)
-      let id = event.currentTarget.dataset.item.id;
-      // 设置Id
-      wx.setStorageSync('id', id)
-      // 切换到新建
-      wx.switchTab({
-        url: '/pages/new/new'
-      })
-    } catch (e) { }
+    // 控制点击事件在350ms内触发，加这层判断是为了防止长按时会触发点击事件
+    if (this.touchEndTime - this.touchStartTime < 350) {
+      try {
+        // 设置编辑状态
+        wx.setStorageSync('isEdit', true)
+        let id = event.currentTarget.dataset.item.id;
+        // 设置Id
+        wx.setStorageSync('id', id)
+        // 切换到新建
+        wx.switchTab({
+          url: '/pages/new/new'
+        })
+      } catch (e) { }
+    }
+  },
+
+  onClickLongDelete(event: any) {
+    this.onClickdeleteModal(event);
   },
 
   /**
@@ -184,6 +211,16 @@ Page({
         });
       }
     } catch (e) { }
+  },
+
+  /**
+   * 切换模式
+   */
+  onClickToggleMode() {
+    this.data.isListMode = !this.data.isListMode;
+    this.setData!({
+      isListMode: this.data.isListMode
+    });
   },
 
   /**
