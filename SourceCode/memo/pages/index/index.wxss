@@ -73,8 +73,8 @@
   width: 100%;
   padding: 10px 10px 10px 20px;
   margin-right: 0;
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
   -webkit-transform: translateX(90px);
   transform: translateX(90px);
   margin-left: -90px;
@@ -115,8 +115,8 @@
   color: #fff;
   -webkit-transform: translateX(90px);
   transform: translateX(90px);
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
 }
 
 .index .body .list .box .box-inside.touch-move-active .content,
