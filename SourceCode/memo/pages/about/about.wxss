@@ -27,3 +27,15 @@
   font-size: 16px;
   line-height: 24px;
 }
+
+.disclaimer {
+  position: fixed;
+  bottom: 15px;
+  left: 0px;
+  width: 100%;
+  text-align: center;
+  color: #555;
+  text-decoration: underline;
+  font-size: 15px;
+  z-index: 100 !important;
+}

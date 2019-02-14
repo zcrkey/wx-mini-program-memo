@@ -12,5 +12,8 @@
     创建于 2019
     </text>
   </view>
+  <view class="disclaimer" bindtap="onClickDisclaimer">
+    免责声明
+  </view>
 
 </view>
